@@ -50,6 +50,7 @@ public class Home extends Fragment {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         flt_addSP = view.findViewById(R.id.flt_addSP);
         rcvhome = view.findViewById(R.id.rcvHome);
+
         flt_addSP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,6 +61,7 @@ public class Home extends Fragment {
 
         layoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         rcvhome.setLayoutManager(layoutManager);
+
         reloadFragment();
         return  view;
     }
