@@ -22,7 +22,6 @@ import com.example.asigment_and103.Model.PRODUCT;
 import com.example.asigment_and103.R;
 import com.example.asigment_and103.ViewHolder.MenuViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,7 +39,8 @@ public class Home extends Fragment {
     RecyclerView.LayoutManager layoutManager;
 
     FirebaseRecyclerAdapter<PRODUCT, MenuViewHolder> adapter;
-    FirebaseRecyclerOptions.Builder<PRODUCT> option = new FirebaseRecyclerOptions.Builder<PRODUCT>().setQuery(product,PRODUCT.class);
+
+
 
     public Home() {
     }
@@ -57,29 +57,21 @@ public class Home extends Fragment {
             }
         });
         rcvhome.setHasFixedSize(false);
-        rcvhome.setLayoutManager(layoutManager);
+
         layoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+        rcvhome.setLayoutManager(layoutManager);
         reloadFragment();
         return  view;
     }
 
     public void reloadFragment() {
-         adapter = new FirebaseRecyclerAdapter<PRODUCT, MenuViewHolder>(option.build()) {
-             @Override
-             protected void onBindViewHolder(@NonNull MenuViewHolder menuViewHolder, int i, @NonNull PRODUCT product) {
-                 menuViewHolder.txttensp.setText(product.getNamePRD());
-                 menuViewHolder.txtgiasp.setText(product.getPricePRD());
-                 Picasso.with(getContext()).load(product.getImagePRD()).into(menuViewHolder.img_home);
-             }
-
-             @NonNull
-             @Override
-             public MenuViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                 View view1 = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home,parent,true);
-
-                 return new MenuViewHolder(view1);
-             }
-         };
+        adapter=new FirebaseRecyclerAdapter<PRODUCT, MenuViewHolder>(PRODUCT.class,R.layout.item_home,MenuViewHolder.class,product) {
+            @Override
+            protected void populateViewHolder(MenuViewHolder menuViewHolder, PRODUCT product, int i) {
+                menuViewHolder.txttensp.setText(product.getNamePRD());
+                menuViewHolder.txtgiasp.setText(product.getPricePRD());
+            }
+        };
          rcvhome.setAdapter(adapter);
     }
     private void addsp() {

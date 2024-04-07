@@ -1,6 +1,6 @@
 package com.example.asigment_and103.ViewHolder;
 
-//import android.support.v7.widget.RecyclerView;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
